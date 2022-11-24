@@ -1,0 +1,3 @@
+[submodule "philosophers/ft_mylibft"]
+	path = philosophers/ft_mylibft
+	url = https://github.com/r4pidstart/ft_mylibft
