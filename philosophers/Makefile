@@ -6,19 +6,19 @@
 #    By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:48:31 by tjo               #+#    #+#              #
-#    Updated: 2022/11/24 21:23:05 by tjo              ###   ########.fr        #
+#    Updated: 2022/11/25 02:04:54 by tjo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CFLAGS = -Wall -Wextra -Werror -g3 -ggdb
+CFLAGS = -Wall -Wextra -Werror -g3 -ggdb #-pthread
 
 LIBFT = ft_mylibft/libft.a
 LIBFT_SRCS = ft_mylibft
-SRCS = 
+SRCS = ft_main.c ft_utils.c
 
 ifdef BONUS
-	NAME = philo
+	NAME = philo_bonus
 	FOLDER = bonus/
 	SRCS = 
 else
@@ -27,11 +27,11 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(addprefix $(FOLDER), $(SRCS:.c=.o))
+$(NAME): $(addprefix $(FOLDER), $(SRCS:.c=.o)) #$(LIBFT)
 	cc $(CFLAGS) \
 	-o ./$(NAME) \
 	$(addprefix $(FOLDER), $(SRCS)) \
-	-L$(LIBFT_SRCS) -lft
+	#-L$(LIBFT_SRCS) -lft
 
 $(LIBFT):
 	make -C $(LIBFT_SRCS) all

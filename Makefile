@@ -1,8 +1,8 @@
 all: fclean
-	make -C pipex all
+	make -C philosophers all
 fclean:
-	make -C pipex fclean
+	make -C philosophers fclean
 bonus:
-	make -C pipex bonus
+	make -C philosophers bonus
 t:
 	cc test.c -o test
