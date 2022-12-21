@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:07:04 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 06:08:58 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 06:13:28 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_status(t_philo *philo, int status)
 {
 	pthread_mutex_lock(&philo->table->is_end_lock);
 	pthread_mutex_lock(&philo->table->print_lock);
-	if (philo->table->is_end)
+	if (philo->table->is_end && status != DIE)
 	{
 		pthread_mutex_unlock(&philo->table->print_lock);
 		pthread_mutex_unlock(&philo->table->is_end_lock);
