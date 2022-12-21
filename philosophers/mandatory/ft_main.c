@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:07:04 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 05:44:40 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 06:08:58 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ int	is_end(t_philo *philo)
 
 void	print_status(t_philo *philo, int status)
 {
+	pthread_mutex_lock(&philo->table->is_end_lock);
 	pthread_mutex_lock(&philo->table->print_lock);
-	if (is_end(philo))
+	if (philo->table->is_end)
 	{
 		pthread_mutex_unlock(&philo->table->print_lock);
+		pthread_mutex_unlock(&philo->table->is_end_lock);
 		return ;
 	}
 	printf("%ld %d ", get_time() - philo->table->start_time, philo->id + 1);
@@ -50,6 +52,7 @@ void	print_status(t_philo *philo, int status)
 	else if (status == FORK)
 		printf("has taken a fork\n");
 	pthread_mutex_unlock(&philo->table->print_lock);
+	pthread_mutex_unlock(&philo->table->is_end_lock);
 }
 
 int	dining(t_table *t)
