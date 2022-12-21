@@ -37,7 +37,10 @@
 		"set": "c",
 		"thread": "c",
 		"unordered_map": "c",
-		"unordered_set": "c"
+		"unordered_set": "c",
+		"ft_libft.h": "c",
+		"__threading_support": "c",
+		"time.h": "c"
 	},
     "editor.insertSpaces": false,
 	"editor.detectIndentation": false,

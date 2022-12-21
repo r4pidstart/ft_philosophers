@@ -6,7 +6,7 @@
 #    By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:48:31 by tjo               #+#    #+#              #
-#    Updated: 2022/11/25 02:04:54 by tjo              ###   ########.fr        #
+#    Updated: 2022/12/22 04:46:19 by tjo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror -g3 -ggdb #-pthread
 
 LIBFT = ft_mylibft/libft.a
 LIBFT_SRCS = ft_mylibft
-SRCS = ft_main.c ft_utils.c
+SRCS = ft_main.c ft_init.c ft_monitor.c ft_philo.c ft_error.c
 
 ifdef BONUS
 	NAME = philo_bonus
