@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:23:22 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 06:05:13 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 06:22:56 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	philo_think(t_philo *philo, int flag)
 				- philo->table->tte) / 2;
 	if (sleep_time < 0)
 		sleep_time = 0;
+	if (sleep_time > 100)
+		sleep_time = 100;
 	if (!flag)
 		print_status(philo, THINK);
 	if (sleep_time)
@@ -70,7 +72,9 @@ void	*philo(void *args)
 	t_philo	*p;
 
 	p = (t_philo *)args;
+	pthread_mutex_lock(&p->eaten_lock);
 	p->last_eaten = get_time();
+	pthread_mutex_unlock(&p->eaten_lock);
 	if (p->table->ttd == 0)
 		return (0);
 	if (p->table->p_cnt == 1)
