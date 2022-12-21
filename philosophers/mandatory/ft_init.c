@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:41:36 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 05:37:59 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 05:59:25 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,16 @@ static int	init_philo(t_table **table)
 			return (e(MUTEX_INIT_FAILED));
 		(*table)->philo[i]->id = i;
 		(*table)->philo[i]->eat_count = 0;
-		(*table)->philo[i]->fork[0] = i;
-		(*table)->philo[i]->fork[1] = (i + 1) % (*table)->p_cnt;
+		if (i & 1)
+		{
+			(*table)->philo[i]->fork[0] = i;
+			(*table)->philo[i]->fork[1] = (i + 1) % (*table)->p_cnt;
+		}
+		else
+		{
+			(*table)->philo[i]->fork[1] = i;
+			(*table)->philo[i]->fork[0] = (i + 1) % (*table)->p_cnt;
+		}
 		(*table)->philo[i]->table = *table;
 		i++;
 	}

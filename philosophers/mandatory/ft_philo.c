@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:23:22 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 05:31:23 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 06:05:13 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ static void	philo_think(t_philo *philo, int flag)
 
 	sleep_time = (philo->table->ttd - \
 				(get_time() - philo->last_eaten) \
-				- philo->table->tte);
+				- philo->table->tte) / 2;
 	if (sleep_time < 0)
 		sleep_time = 0;
 	if (!flag)
 		print_status(philo, THINK);
-	philo_sleep(philo, get_time() + sleep_time);
+	if (sleep_time)
+		philo_sleep(philo, get_time() + sleep_time);
 }
 
 static void	philo_eat_sleep(t_philo *philo)
@@ -43,14 +44,14 @@ static void	philo_eat_sleep(t_philo *philo)
 	pthread_mutex_lock(&philo->table->fork_lock[philo->fork[1]]);
 	print_status(philo, FORK);
 	print_status(philo, EAT);
+	philo_sleep(philo, get_time() + philo->table->tte);
+	pthread_mutex_unlock(&philo->table->fork_lock[philo->fork[0]]);
+	pthread_mutex_unlock(&philo->table->fork_lock[philo->fork[1]]);
 	pthread_mutex_lock(&philo->eaten_lock);
 	philo->last_eaten = get_time();
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->eaten_lock);
-	philo_sleep(philo, get_time() + philo->table->tte);
 	print_status(philo, SLEEP);
-	pthread_mutex_unlock(&philo->table->fork_lock[philo->fork[0]]);
-	pthread_mutex_unlock(&philo->table->fork_lock[philo->fork[1]]);
 	philo_sleep(philo, get_time() + philo->table->tts);
 }
 
@@ -75,7 +76,7 @@ void	*philo(void *args)
 	if (p->table->p_cnt == 1)
 		return (only_one_philo(p));
 	else if (p->id & 1)
-		philo_think(p, 1);
+		philo_sleep(p, p->last_eaten + 1);
 	while (!is_end(p))
 	{
 		philo_eat_sleep(p);

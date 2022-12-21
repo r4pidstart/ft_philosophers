@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:38:18 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 05:41:59 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 06:02:28 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*monitor(void *args)
 	{
 		if (end_check((t_table *)args))
 			return (0);
-		usleep(100);
+		usleep(1000);
 	}
 	return (0);
 }
