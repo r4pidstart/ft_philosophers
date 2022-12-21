@@ -6,15 +6,13 @@
 #    By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:48:31 by tjo               #+#    #+#              #
-#    Updated: 2022/12/22 04:46:19 by tjo              ###   ########.fr        #
+#    Updated: 2022/12/22 05:04:01 by tjo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CFLAGS = -Wall -Wextra -Werror -g3 -ggdb #-pthread
+CFLAGS = -Wall -Wextra -Werror -g3 -ggdb -pthread
 
-LIBFT = ft_mylibft/libft.a
-LIBFT_SRCS = ft_mylibft
 SRCS = ft_main.c ft_init.c ft_monitor.c ft_philo.c ft_error.c
 
 ifdef BONUS
@@ -31,10 +29,6 @@ $(NAME): $(addprefix $(FOLDER), $(SRCS:.c=.o)) #$(LIBFT)
 	cc $(CFLAGS) \
 	-o ./$(NAME) \
 	$(addprefix $(FOLDER), $(SRCS)) \
-	#-L$(LIBFT_SRCS) -lft
-
-$(LIBFT):
-	make -C $(LIBFT_SRCS) all
 
 %.o: %.c
 	cc $(CFLAGS) -c $^ -o $@
@@ -45,11 +39,9 @@ bonus:
 clean:
 	rm -rf */*.o
 	rm -rf *.o
-	make clean -C $(LIBFT_SRCS)
 	
 fclean: clean
 	rm -rf $(NAME)
-	make fclean -C $(LIBFT_SRCS)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:07:04 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 05:00:15 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 05:32:30 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,17 @@ int	dining(t_table *t)
 int	main(int argc, char **argv)
 {
 	t_table	*table;
+	int		i;
 
 	if (!(5 <= argc && argc <= 6))
 		return (!printf("Wrong argument(s)\n"));
 	if (init_table(argc, argv, &table) || dining(table))
 		return (1);
+	i = 0;
+	while (i < table->p_cnt)
+	{
+		pthread_join(table->philo[i]->thread, 0);
+		i++;
+	}
+	pthread_join(table->monitor, 0);
 }

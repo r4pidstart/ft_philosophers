@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:38:18 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 04:38:33 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 05:32:48 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static int	end_check(t_table *t)
 
 void	*monitor(void *args)
 {
+	if (((t_table *)args)->p_cnt == 1)
+		return (0);
 	while (1)
 	{
 		if (end_check((t_table *)args))

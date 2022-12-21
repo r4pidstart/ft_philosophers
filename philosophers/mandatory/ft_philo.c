@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:23:22 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 04:58:54 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 05:31:23 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void	*philo(void *args)
 	p->last_eaten = get_time();
 	if (p->table->ttd == 0)
 		return (0);
-	else if (p->id & 1)
-		philo_think(p, 1);
 	if (p->table->p_cnt == 1)
 		return (only_one_philo(p));
+	else if (p->id & 1)
+		philo_think(p, 1);
 	while (!is_end(p))
 	{
 		philo_eat_sleep(p);
