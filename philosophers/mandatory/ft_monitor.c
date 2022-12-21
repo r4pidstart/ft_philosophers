@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:38:18 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 05:32:48 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 05:41:59 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static int	end_check(t_table *t)
 		if (get_time() - t->philo[i]->last_eaten > t->ttd)
 		{
 			print_status(t->philo[i], DIE);
+			pthread_mutex_unlock(&t->philo[i]->eaten_lock);
 			return (set_end(t));
 		}
 		if (t->must_eat != -1 && t->philo[i]->eat_count < t->must_eat)
