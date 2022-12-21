@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:23:22 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 06:22:56 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 06:37:53 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ static void	philo_eat_sleep(t_philo *philo)
 	pthread_mutex_lock(&philo->table->fork_lock[philo->fork[1]]);
 	print_status(philo, FORK);
 	print_status(philo, EAT);
-	philo_sleep(philo, get_time() + philo->table->tte);
-	pthread_mutex_unlock(&philo->table->fork_lock[philo->fork[0]]);
-	pthread_mutex_unlock(&philo->table->fork_lock[philo->fork[1]]);
 	pthread_mutex_lock(&philo->eaten_lock);
 	philo->last_eaten = get_time();
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->eaten_lock);
+	philo_sleep(philo, get_time() + philo->table->tte);
+	pthread_mutex_unlock(&philo->table->fork_lock[philo->fork[0]]);
+	pthread_mutex_unlock(&philo->table->fork_lock[philo->fork[1]]);
 	print_status(philo, SLEEP);
 	philo_sleep(philo, get_time() + philo->table->tts);
 }
