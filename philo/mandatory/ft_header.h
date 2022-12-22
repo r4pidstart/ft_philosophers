@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:08:35 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 04:46:03 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 17:04:13 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*monitor(void *args);
 int		e(const char *msg);
 
 # define MALLOC_FAILED "MALLOC FAILED\n"
-# define WRONG_ARGUMENT "MALLOC FAILED\n"
+# define WRONG_ARGUMENT "WROND ARGUMENT\n"
 # define MUTEX_INIT_FAILED "MUTEX INIT FAILED\n"
 # define THREAD_CREATE_FAILED "THREAD CREATE FAILED\n"
 

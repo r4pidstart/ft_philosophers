@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:23:22 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 06:37:53 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 17:00:03 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void	*philo(void *args)
 	pthread_mutex_lock(&p->eaten_lock);
 	p->last_eaten = get_time();
 	pthread_mutex_unlock(&p->eaten_lock);
-	if (p->table->ttd == 0)
+	if (p->table->ttd == 0 || p->table->must_eat == 0)
 		return (0);
 	if (p->table->p_cnt == 1)
 		return (only_one_philo(p));
 	else if (p->id & 1)
-		philo_sleep(p, p->last_eaten + 1);
+		philo_sleep(p, get_time() + 1);
 	while (!is_end(p))
 	{
 		philo_eat_sleep(p);
