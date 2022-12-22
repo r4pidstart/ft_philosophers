@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:23:22 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 05:07:40 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 05:17:06 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	philo_think(t_philo *philo, int flag)
 	if (sleep_time > 100)
 		sleep_time = 100;
 	if (!flag)
-		print_status(philo, THINK);
+		print_status(philo, THINK, 0);
 	if (sleep_time)
 		philo_sleep(philo, get_time() + sleep_time);
 }
@@ -42,10 +42,10 @@ static void	philo_think(t_philo *philo, int flag)
 static void	philo_eat_sleep(t_philo *philo)
 {
 	sem_wait(philo->table->fork_sem);
-	print_status(philo, FORK);
+	print_status(philo, FORK, 0);
 	sem_wait(philo->table->fork_sem);
-	print_status(philo, FORK);
-	print_status(philo, EAT);
+	print_status(philo, FORK, 0);
+	print_status(philo, EAT, 0);
 	sem_wait(philo->eaten_sem);
 	philo->last_eaten = get_time();
 	philo->eat_count++;
@@ -53,7 +53,7 @@ static void	philo_eat_sleep(t_philo *philo)
 	philo_sleep(philo, get_time() + philo->table->tte);
 	sem_post(philo->table->fork_sem);
 	sem_post(philo->table->fork_sem);
-	print_status(philo, SLEEP);
+	print_status(philo, SLEEP, 0);
 	philo_sleep(philo, get_time() + philo->table->tts);
 }
 
@@ -75,9 +75,9 @@ void	*philo(void *args)
 	p = ((t_table *)args)->this;
 	if (p->table->p_cnt == 1)
 	{
-		print_status(p, FORK);
+		print_status(p, FORK, 0);
 		philo_sleep(p, get_time() + p->table->ttd);
-		print_status(p, DIE);
+		print_status(p, DIE, 1);
 		return (0);
 	}
 	if (init_philo_process(p))

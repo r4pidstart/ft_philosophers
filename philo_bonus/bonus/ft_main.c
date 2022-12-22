@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:07:04 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 05:05:49 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 05:16:25 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,9 @@ int	is_end(t_table *table)
 	return (ret);
 }
 
-void	print_status(t_philo *philo, int status)
+void	print_status(t_philo *philo, int status, int end)
 {
-	sem_wait(philo->table->is_end_sem);
 	sem_wait(philo->table->print_sem);
-	if (philo->table->is_end)
-	{
-		sem_post(philo->table->print_sem);
-		sem_post(philo->table->is_end_sem);
-		return ;
-	}
 	printf("%ld %d ", get_time() - philo->table->start_time, philo->id + 1);
 	if (status == THINK)
 		printf("is thinking\n");
@@ -51,8 +44,8 @@ void	print_status(t_philo *philo, int status)
 		printf("died\n");
 	else if (status == FORK)
 		printf("has taken a fork\n");
-	sem_post(philo->table->print_sem);
-	sem_post(philo->table->is_end_sem);
+	if (!end)
+		sem_post(philo->table->print_sem);
 }
 
 int	dining(t_table *t)
@@ -92,5 +85,5 @@ int	main(int argc, char **argv)
 	if (init_table(argc, argv, &table) || dining(table))
 		return (1);
 	while (!is_end(table))
-		usleep(1000);
+		usleep(10000);
 }

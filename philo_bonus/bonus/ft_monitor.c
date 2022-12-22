@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:38:18 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 04:53:42 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 05:17:15 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	philo_check(t_philo *p)
 	sem_wait(p->eaten_sem);
 	if (get_time() - p->last_eaten > p->table->ttd)
 	{
-		print_status(p, DIE);
-		sem_post(p->eaten_sem);
+		print_status(p, DIE, 1);
 		sem_post(p->table->died_sem);
+		sem_post(p->eaten_sem);
 		return (1);
 	}
 	if (p->table->must_eat != -1 && p->eat_count >= p->table->must_eat \
@@ -49,9 +49,6 @@ void	kill_philo(t_table *table)
 	int	i;
 
 	i = 0;
-	sem_wait(table->print_sem);
-	printf("KILL ALL PHILOS\n");
-	sem_post(table->print_sem);
 	while (i < table->p_cnt)
 	{
 		kill(table->pid[i], SIGKILL);
