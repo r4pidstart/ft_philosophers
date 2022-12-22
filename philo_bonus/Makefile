@@ -6,14 +6,14 @@
 #    By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:48:31 by tjo               #+#    #+#              #
-#    Updated: 2022/12/23 02:53:20 by tjo              ###   ########.fr        #
+#    Updated: 2022/12/23 05:08:42 by tjo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo_bonus
 CFLAGS = -Wall -Wextra -Werror -g3 -ggdb -pthread
 
-SRCS = ft_error.c ft_init.c ft_main.c ft_monitor.c ft_philo.c
+SRCS = ft_error.c ft_init.c ft_main.c ft_monitor.c ft_philo.c ft_utils1.c ft_utils2.c
 FOLDER = bonus/
 
 all: $(NAME)

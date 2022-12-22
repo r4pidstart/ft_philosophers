@@ -6,144 +6,11 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:41:36 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 04:11:37 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 05:05:33 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_header.h"
-
-static size_t	ft_strlen(const char *s)
-{
-	size_t	n;
-
-	n = 0;
-	while (s[n])
-		n++;
-	return (n);
-}
-
-static int	ft_atoi_check(const char *str, int *chk)
-{
-	char		*cur;
-	int			minus_cnt;
-	long long	ret;
-
-	cur = (char *)str;
-	while ((9 <= *cur && *cur <= 13) || *cur == 20 || *cur == 32)
-		cur++;
-	ret = 0;
-	minus_cnt = 0;
-	if ('+' == *cur || '-' == *cur)
-	{
-		if (*cur == '-')
-			minus_cnt++;
-		cur++;
-	}
-	if (*cur == '\0')
-		(*chk)++;
-	while ('0' <= *cur && *cur <= '9')
-		ret = ret * 10 + (*(cur++) - '0');
-	if (minus_cnt)
-		ret *= -1;
-	if (*cur != '\0' || ft_strlen(str) > 11 \
-		|| ret < INT32_MIN || ret > INT32_MAX)
-		(*chk)++;
-	return (ret);
-}
-
-int	get_length(long long n)
-{
-	int	ret;
-
-	ret = 0;
-	if (n == 0)
-		ret++;
-	if (n < 0)
-	{
-		ret++;
-		n *= -1;
-	}
-	while (n)
-	{
-		ret++;
-		n /= 10;
-	}
-	return (ret);
-}
-
-char	*ft_itoa(int n)
-{
-	long long	tmp;
-	char		*ret;
-	int			cur;
-
-	ret = (char *)malloc(sizeof(char) * get_length(n) + 1);
-	if (!ret)
-		return (0);
-	tmp = n;
-	cur = 0;
-	if (n < 0)
-	{
-		ret[cur++] = '-';
-		tmp *= -1;
-	}
-	if (n == 0)
-		ret[cur++] = '0';
-	cur = get_length(n);
-	ret[cur] = '\0';
-	while (tmp)
-	{
-		ret[--cur] = tmp % 10 + '0';
-		tmp /= 10;
-	}
-	return (ret);
-}
-
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	size_t	cur;
-
-	if (dst == src)
-		return (dst);
-	if (dst < src)
-	{
-		cur = 0;
-		while (0 <= cur && cur < len)
-		{
-			*((char *)dst + cur) = *((char *)src + cur);
-			cur++;
-		}
-	}
-	else
-	{
-		cur = len - 1;
-		while (0 <= cur && cur < len)
-		{
-			*((char *)dst + cur) = *((char *)src + cur);
-			cur--;
-		}
-	}
-	return (dst);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*ret;
-	size_t	s1_len;
-	size_t	s2_len;
-
-	if (!s1 || !s2)
-		return (0);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	ret = (char *)malloc(sizeof(char) * s1_len + s2_len + 1);
-	if (!ret)
-		return (0);
-	ft_memmove(ret, s1, s1_len);
-	ft_memmove(ret + s1_len, s2, s2_len);
-	ret[s1_len + s2_len] = 0;
-	return (ret);
-}
 
 int	init_philo_eaten_sem_name(t_philo *philo)
 {
@@ -226,9 +93,7 @@ int	init_table(int argc, char **argv, t_table **table)
 		return (e(WRONG_ARGUMENT));
 	if (init_philo(table))
 		return (1);
-	if (init_table_lock(table))
-		return (1);
-	if ((*table)->must_eat == 0)
+	if (init_table_lock(table) || (*table)->must_eat == 0)
 		return (1);
 	return (0);
 }

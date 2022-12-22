@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:07:04 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 04:16:52 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 05:05:49 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	is_end(t_table *table)
 	sem_wait(table->is_end_sem);
 	ret = table->is_end;
 	sem_post(table->is_end_sem);
-
 	return (ret);
 }
 
@@ -35,7 +34,7 @@ void	print_status(t_philo *philo, int status)
 {
 	sem_wait(philo->table->is_end_sem);
 	sem_wait(philo->table->print_sem);
-	if (philo->table->is_end && status != DIE)
+	if (philo->table->is_end)
 	{
 		sem_post(philo->table->print_sem);
 		sem_post(philo->table->is_end_sem);
@@ -93,5 +92,5 @@ int	main(int argc, char **argv)
 	if (init_table(argc, argv, &table) || dining(table))
 		return (1);
 	while (!is_end(table))
-		usleep(100000);
+		usleep(1000);
 }

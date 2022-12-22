@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:23:22 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 04:30:51 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 05:07:40 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,18 @@ int	init_philo_process(t_philo *p)
 	return (0);
 }
 
-void	*only_one_philo(t_philo *philo)
-{
-	print_status(philo, FORK);
-	philo_sleep(philo, get_time() + philo->table->ttd);
-	print_status(philo, DIE);
-	return (0);
-}
-
 void	*philo(void *args)
 {
 	t_philo	*p;
 
 	p = ((t_table *)args)->this;
 	if (p->table->p_cnt == 1)
-		return (only_one_philo(p));
+	{
+		print_status(p, FORK);
+		philo_sleep(p, get_time() + p->table->ttd);
+		print_status(p, DIE);
+		return (0);
+	}
 	if (init_philo_process(p))
 		return (0);
 	sem_wait(p->eaten_sem);

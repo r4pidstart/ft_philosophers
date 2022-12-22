@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:08:35 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 03:06:47 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 05:04:27 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ void	*full_monitor(void *args);
 void	kill_philo(t_table *table);
 // ft_error.c
 int		e(const char *msg);
+// ft_utils1.c
+int		ft_atoi_check(const char *str, int *chk);
+char	*ft_strjoin(char const *s1, char const *s2);
+// ft_utils2.c
+char	*ft_itoa(int n);
 
 # define MALLOC_FAILED "MALLOC FAILED\n"
 # define WRONG_ARGUMENT "WRONG_ARGUMENT\n"
