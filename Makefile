@@ -1,7 +1,7 @@
 all: fclean
-	make -C philosophers all
+	make -C philo_bonus all
 fclean:
-	make -C philosophers fclean
+	make -C philo_bonus fclean
 bonus:
 	make -C philosophers bonus
 t:
