@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:41:36 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 23:38:05 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/22 23:45:51 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	init_table(int argc, char **argv, t_table **table)
 	else
 		(*table)->must_eat = -1;
 	(*table)->is_end = 0;
-	if (chk || !(*table)->p_cnt || (*table)->ttd < 0 \
+	if (chk || (*table)->p_cnt <= 0 || (*table)->ttd < 0 \
 		|| (*table)->tte < 0 || (*table)->tts < 0)
 		return (e(WRONG_ARGUMENT));
 	if (init_philo(table))
