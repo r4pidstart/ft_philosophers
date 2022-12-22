@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:38:18 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 05:17:15 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 05:22:49 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	*full_monitor(void *args)
 	table = (t_table *)args;
 	if (table->p_cnt == 1 || table->must_eat == -1)
 		return (0);
-	usleep(10000);
+	usleep(1000);
 	while (table->eat_end_cnt < table->p_cnt)
 	{
 		if (is_end(table))
@@ -85,7 +85,7 @@ void	*died_monitor(void *args)
 {
 	t_table	*table;
 
-	usleep(10000);
+	usleep(1000);
 	table = (t_table *)args;
 	if (table->p_cnt == 1)
 	{
