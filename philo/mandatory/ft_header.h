@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:08:35 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 17:04:13 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 04:36:54 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	*philo(void *args);
 void	*monitor(void *args);
 // ft_error.c
 int		e(const char *msg);
+// ft_utils.c
+int		ft_atoi_check(const char *str, int *chk);
 
 # define MALLOC_FAILED "MALLOC FAILED\n"
 # define WRONG_ARGUMENT "WROND ARGUMENT\n"

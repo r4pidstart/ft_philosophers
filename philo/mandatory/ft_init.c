@@ -6,49 +6,24 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:41:36 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 23:45:51 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 04:38:06 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_header.h"
 
-static size_t	ft_strlen(const char *s)
+static void	fork_assign(int i, t_table *table)
 {
-	size_t	n;
-
-	n = 0;
-	while (s[n])
-		n++;
-	return (n);
-}
-
-static int	ft_atoi_check(const char *str, int *chk)
-{
-	char		*cur;
-	int			minus_cnt;
-	long long	ret;
-
-	cur = (char *)str;
-	while ((9 <= *cur && *cur <= 13) || *cur == 20 || *cur == 32)
-		cur++;
-	ret = 0;
-	minus_cnt = 0;
-	if ('+' == *cur || '-' == *cur)
+	if (i & 1)
 	{
-		if (*cur == '-')
-			minus_cnt++;
-		cur++;
+		table->philo[i]->fork[0] = i;
+		table->philo[i]->fork[1] = (i + 1) % table->p_cnt;
 	}
-	if (*cur == '\0')
-		(*chk)++;
-	while ('0' <= *cur && *cur <= '9')
-		ret = ret * 10 + (*(cur++) - '0');
-	if (minus_cnt)
-		ret *= -1;
-	if (*cur != '\0' || ft_strlen(str) > 11 \
-		|| ret < INT32_MIN || ret > INT32_MAX)
-		(*chk)++;
-	return (ret);
+	else
+	{
+		table->philo[i]->fork[1] = i;
+		table->philo[i]->fork[0] = (i + 1) % table->p_cnt;
+	}
 }
 
 static int	init_philo(t_table **table)
@@ -69,16 +44,7 @@ static int	init_philo(t_table **table)
 		(*table)->philo[i]->id = i;
 		(*table)->philo[i]->eat_count = 0;
 		(*table)->philo[i]->last_eaten = get_time();
-		if (i & 1)
-		{
-			(*table)->philo[i]->fork[0] = i;
-			(*table)->philo[i]->fork[1] = (i + 1) % (*table)->p_cnt;
-		}
-		else
-		{
-			(*table)->philo[i]->fork[1] = i;
-			(*table)->philo[i]->fork[0] = (i + 1) % (*table)->p_cnt;
-		}
+		fork_assign(i, *table);
 		(*table)->philo[i]->table = *table;
 		i++;
 	}

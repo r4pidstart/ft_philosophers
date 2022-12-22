@@ -6,14 +6,14 @@
 #    By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:48:31 by tjo               #+#    #+#              #
-#    Updated: 2022/12/22 05:04:01 by tjo              ###   ########.fr        #
+#    Updated: 2022/12/23 04:38:28 by tjo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CFLAGS = -Wall -Wextra -Werror -g3 -ggdb -pthread
 
-SRCS = ft_main.c ft_init.c ft_monitor.c ft_philo.c ft_error.c
+SRCS = ft_main.c ft_init.c ft_monitor.c ft_philo.c ft_error.c ft_utils.c
 
 ifdef BONUS
 	NAME = philo_bonus
