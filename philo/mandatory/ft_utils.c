@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 04:36:27 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 04:36:41 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 05:51:31 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_atoi_check(const char *str, int *chk)
 	if (minus_cnt)
 		ret *= -1;
 	if (*cur != '\0' || ft_strlen(str) > 11 \
-		|| ret < INT32_MIN || ret > INT32_MAX)
+		|| ret < INT32_MIN || ret > INT32_MAX || minus_cnt)
 		(*chk)++;
 	return (ret);
 }
