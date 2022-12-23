@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:07:04 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 10:18:03 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 10:25:33 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	dining(t_table *t)
 	return (0);
 }
 
-void	distroy_mutex(t_table *table)
+void	destroy_mutex(t_table *table)
 {
 	int	i;
 
