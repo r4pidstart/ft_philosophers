@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:08:35 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 09:30:44 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 10:18:17 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_table
 // ft_main.c
 int		is_end(t_philo *philo);
 void	print_status(t_philo *philo, int status);
+void	distroy_mutex(t_table *table);
 // ft_init.c
 int		init_table(int argc, char **argv, t_table **table);
 // ft_philo.c

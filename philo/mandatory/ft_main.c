@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:07:04 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 09:34:22 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 10:18:03 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,21 @@ int	dining(t_table *t)
 	return (0);
 }
 
+void	distroy_mutex(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	while (i < table->p_cnt)
+	{
+		pthread_mutex_destroy(&table->philo[i]->eaten_lock);
+		pthread_mutex_destroy(&table->fork_lock[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&table->is_end_lock);
+	pthread_mutex_destroy(&table->print_lock);
+}
+
 int	main(int argc, char **argv)
 {
 	t_table	*table;
@@ -80,13 +95,5 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	pthread_join(table->monitor, 0);
-	i = 0;
-	while (i < table->p_cnt)
-	{
-		pthread_mutex_destroy(&table->philo[i]->eaten_lock);
-		pthread_mutex_destroy(&table->fork_lock[i]);
-		i++;
-	}
-	pthread_mutex_destroy(&table->is_end_lock);
-	pthread_mutex_destroy(&table->print_lock);
+	destroy_mutex(table);
 }
