@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 04:23:22 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 17:00:03 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 11:37:04 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	philo_think(t_philo *philo, int flag)
 	if (!flag)
 		print_status(philo, THINK);
 	if (sleep_time)
-		philo_sleep(philo, get_time() + sleep_time);
+		philo_sleep(philo, get_time() + sleep_time + 1);
 }
 
 static void	philo_eat_sleep(t_philo *philo)
