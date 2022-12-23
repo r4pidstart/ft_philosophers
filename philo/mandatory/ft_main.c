@@ -6,19 +6,11 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:07:04 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/22 06:19:59 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 09:34:22 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_header.h"
-
-time_t	get_time(void)
-{
-	struct timeval		tv;
-
-	gettimeofday(&tv, 0);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
 
 int	is_end(t_philo *philo)
 {
@@ -88,4 +80,13 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	pthread_join(table->monitor, 0);
+	i = 0;
+	while (i < table->p_cnt)
+	{
+		pthread_mutex_destroy(&table->philo[i]->eaten_lock);
+		pthread_mutex_destroy(&table->fork_lock[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&table->is_end_lock);
+	pthread_mutex_destroy(&table->print_lock);
 }

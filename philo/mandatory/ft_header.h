@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 02:08:35 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 04:36:54 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 09:30:44 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_table
 }t_table;
 
 // ft_main.c
-time_t	get_time(void);
 int		is_end(t_philo *philo);
 void	print_status(t_philo *philo, int status);
 // ft_init.c
@@ -63,6 +62,7 @@ void	*monitor(void *args);
 // ft_error.c
 int		e(const char *msg);
 // ft_utils.c
+time_t	get_time(void);
 int		ft_atoi_check(const char *str, int *chk);
 
 # define MALLOC_FAILED "MALLOC FAILED\n"

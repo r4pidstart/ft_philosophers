@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 04:36:27 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/23 05:51:31 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/23 09:30:35 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,12 @@ int	ft_atoi_check(const char *str, int *chk)
 		|| ret < INT32_MIN || ret > INT32_MAX || minus_cnt)
 		(*chk)++;
 	return (ret);
+}
+
+time_t	get_time(void)
+{
+	struct timeval		tv;
+
+	gettimeofday(&tv, 0);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
